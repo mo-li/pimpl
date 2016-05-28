@@ -1,0 +1,18 @@
+[section Delegating Constructors]
+
+The ['delegating constructors] functionality is available in C++11. For implementation reasons that functionality might instead be implemented using ['Pimpl]:
+
+ struct Foo : public pimpl<Foo>::shared
+ {
+    Foo ();
+    Foo (int);
+ };
+
+ Foo::Foo(int v) : pimpl_type(v) { ... };
+
+ Foo::Foo() : pimpl_type(pimpl<Foo>::null()) // Delegating constructor
+ {
+   *this = Foo(42); // Calling the actual (non-delegating) constructor
+ };
+
+[endsect]

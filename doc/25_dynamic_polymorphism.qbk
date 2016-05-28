@@ -1,0 +1,64 @@
+[section Run-Time Polymorphic Class Hierarchy]
+
+See the Bridge pattern in [link 6 \[6\]].
+
+The declaration file:
+
+ // If you are not planning on applying dynamic_cast<> to 
+ // the public interface base class, then it does not need to be virtual
+ struct Book : public pimpl<Book>::pointer_semantics
+ {
+    Book(parameters);
+    
+    string const&  title() const;
+    string const& author() const;
+ };
+
+ struct ThickBook : public Book
+ {
+    ThickBook(parameters);
+ };
+
+ struct ThickestBook : public ThickBook
+ {
+    ThickestBook(parameters);
+ };
+
+The implementation file:
+
+ typedef pimpl<Book>::implementation implementation;
+
+ template<> struct pimpl<Book>::implementation
+ {
+    implementation(parameters) {...}
+
+    virtual ~implementation() {...}
+    ...
+ };
+ 
+ struct ThickBookImpl : public implementation
+ {
+    ThickBookImpl(parameters) : implementation(parameters) {...}
+    ...
+ };
+
+ struct ThickestBookImpl : public ThickBookImpl
+ {
+    ThickestBookImpl(parameters) : ThickBookImpl(parameters) {...}
+    ...
+ };
+
+ ThickBook:: ThickBook(parameters) : Book(pimpl<Book>::null())
+ {
+    reset(new ThickBook(parameters));
+    ...
+ }
+
+ ThickestBook:: ThickestBook(parameters) : ThickBook(pimpl<ThickBook>::null())
+ {
+    reset(new ThickestBook(parameters));
+    ...
+ }
+
+[endsect]
+

@@ -1,0 +1,42 @@
+[section pimpl::null()]
+
+Again, ['Pimpl] exhibits a considerably stronger (and automatically managed) association between the external interface and internal implementation. Hence, 
+
+[note the default behavior is that there is always an implementation data behind every interface object.] 
+
+To override this default behavior we might write something like:  
+ 
+ Book::Book() : pimpl_type(pimpl<Book>::null())
+ {
+    // an invalid Book object is created with no data behind it
+ }
+ 
+ void
+ Book::do_something()
+ {
+    if (!*this)
+    {
+        // implementation is created only when needed.
+        this->reset(new implementation(...));
+    }
+    ...
+ } 
+ 
+Here initially we explicitly (via ['pimpl<>::null()]) create the underlying ['pimpl_type] empty (like ['nullptr] or an empty ['std::shared_ptr())]. Later we create a ['pimpl<Book>::implementation] instance explicitly and assign the ['pimpl_type] to manage it. 
+
+The technique is useful for lazy-instantiation optimization (as in the example above) or to support dynamic polymorphism that is discussed later.
+
+We might use such an invalid ['Book] object to indicate a no-book condition in the same fashion as ['nullptr] or ['boost::optional] might be used: 
+
+ Book
+ find_book()
+ {  ...
+    return pimpl<Book>::null(); // found nothing, return an invalid Book
+ }
+ ...
+ Book book = find_book();
+ 
+ if (!book) report book-not-found;
+ 
+[endsect] 
+

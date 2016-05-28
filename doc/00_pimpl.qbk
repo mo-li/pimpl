@@ -1,0 +1,40 @@
+[/==============================================================================
+    Copyright (C) 2009-2016 Vladimir Batov
+
+    Use, modification and distribution is subject to the Boost Software
+    License, Version 1.0. (See a copy at http://www.boost.org/LICENSE_1_0.txt)
+===============================================================================/]
+[library The Pimpl
+    [quickbook 1.5]
+    [version C++11]
+    [id pimpl]
+    [dirname pimpl]
+    [copyright 2006-2016 Vladimir Batov]
+    [purpose Generalization of The Pimpl Idiom]
+    [category generic]
+    [authors [Batov, Vladimir]]
+    [source-mode c++]
+    [license
+        Distributed under the Boost Software License, Version 1.0.
+        (See copy at [@http://www.boost.org/LICENSE_1_0.txt])
+    ]
+]
+ 
+[note This documentation is based on the article ([link 1 \[1\]]) originally published in the C/C++ Users Journal.]
+
+[include 01_introduction.qbk]
+[include 02_getting_started.qbk]
+[include 03_value_semantics.qbk]
+[include 04_behind_interface.qbk]
+[include 05_implementation_management.qbk]
+[include 06_null.qbk]
+[include 20_applications.qbk]
+[include 21_delegating_constructors.qbk]
+[include 22_singleton.qbk]
+[include 23_dictionary.qbk]
+[include 24_internal_polymorphism.qbk]
+[include 25_dynamic_polymorphism.qbk]
+[include 29_applications_end.qbk]
+[include 97_references.qbk]
+[include 98_acknowledgments.qbk]
+[include 99_index.qbk]
